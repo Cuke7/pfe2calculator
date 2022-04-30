@@ -10,6 +10,7 @@ export const mutations = {
       id: id,
       modifAttack: 0,
       modifDegats: 0,
+      selectedDices: [],
     });
     state.attacksNumber++;
   },

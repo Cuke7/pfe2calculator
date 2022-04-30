@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center" class="px-2">
     <v-col cols="12" md="8">
-      <div class="text-h3 text-center primary--text">
+      <div class="text-h3 text-center primary--text my-12">
         Calculateur de dégâts PF2E
       </div>
       <v-card-title class="px-0"> Modificateurs fixes : </v-card-title>
@@ -40,12 +40,21 @@
           </v-btn>
         </v-col>
       </v-row>
+
+      <v-row justify="end">
+        <v-col cols="auto">
+          <v-btn color="primary"> Compute </v-btn>
+        </v-col>
+      </v-row>
     </v-col>
   </v-row>
 </template>
 
 <script>
 export default {
+  mounted() {
+    this.addAttack();
+  },
   data: () => ({
     modifAttaque: 0,
     modifDegats: 0,
