@@ -40,9 +40,9 @@ export default {
   data: () => ({
     // attack: this.attackInit,
     attack: {
-      modifAttaque: 0,
+      modifAttaque: -3,
       modifDegats: 0,
-      selectedDices: ["d6"],
+      selectedDices: ["d8"],
     },
   }),
 

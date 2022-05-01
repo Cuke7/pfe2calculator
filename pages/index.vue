@@ -4,6 +4,7 @@
       <div class="text-h3 primary--text text-center my-12">
         PF2E damage calculator
       </div>
+      <v-card-title> Modificateurs globaux : </v-card-title>
       <v-row>
         <v-col cols="5">
           <v-text-field
@@ -39,6 +40,16 @@
           </v-btn>
         </v-col>
       </v-row>
+
+      <v-row justify="end">
+        <v-col cols="auto">
+          <v-btn color="primary" @click="results = compute()"> Calculer </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        {{ results }}
+      </v-row>
     </v-col>
   </v-row>
 </template>
@@ -52,7 +63,7 @@ export default {
   },
 
   data: () => ({
-    //
+    results: [],
   }),
 
   computed: {
@@ -80,6 +91,60 @@ export default {
   methods: {
     addAttack() {
       this.$store.commit("ADD_ATTACK");
+    },
+
+    compute() {
+      let attacks = this.attacks;
+      let globalModifAttaque = this.globalModifAttaque;
+      let globalModifDegats = this.globalModifDegats;
+      let results = [];
+      let turnNumber = 10000;
+
+      for (let CA = 10; CA < 26; CA++) {
+        let dmg = 0;
+        for (let t = 0; t < turnNumber; t++) {
+          for (const attack of attacks) {
+            let diceDamage = this.getAverageDiceDamage(attack.selectedDices);
+            let result = this.rollAttack(20, CA, globalModifAttaque);
+            if (result.hit) {
+              dmg += diceDamage + globalModifDegats;
+            }
+            if (result.cc) {
+              dmg += diceDamage;
+            }
+          }
+        }
+        results.push(dmg / turnNumber);
+      }
+
+      return results;
+    },
+
+    getAverageDiceDamage(dices) {
+      let result = 0;
+      for (const dice of dices) {
+        let diceNumber = dice.split("d")[1];
+        result += (Number(diceNumber) + 1) / 2;
+      }
+      return result;
+    },
+
+    rollAttack(diceSize, CA, bonus_attaque) {
+      let roll = Math.floor(Math.random() * diceSize + 1);
+      let cc = false;
+      let ec = false;
+      let hit = false;
+      if (roll + bonus_attaque >= CA) {
+        hit = true;
+      }
+      if (roll + bonus_attaque - CA >= 10) {
+        cc = true;
+      }
+      if (roll + bonus_attaque - CA <= -10) {
+        ec = true;
+      }
+
+      return { hit, cc, ec };
     },
   },
 };

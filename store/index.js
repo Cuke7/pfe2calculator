@@ -1,5 +1,5 @@
 export const state = () => ({
-  globalModifAttaque: 0,
+  globalModifAttaque: 9,
   globalModifDegats: 0,
   attacks: [],
   attackNumber: 0,
@@ -17,9 +17,9 @@ export const mutations = {
     let id = state.attackNumber;
     state.attacks.push({
       id: id,
-      modifAttaque: 0,
+      modifAttaque: -3,
       modifDegats: 0,
-      selectedDices: ["d6"],
+      selectedDices: ["d8"],
     });
     state.attackNumber++;
   },
