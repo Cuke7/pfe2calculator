@@ -17,9 +17,9 @@ export const mutations = {
     let id = state.attackNumber;
     state.attacks.push({
       id: id,
-      modifAttaque: -3,
+      modifAttaque: 0,
       modifDegats: 0,
-      selectedDices: ["d8"],
+      selectedDices: ["d6"],
     });
     state.attackNumber++;
   },
