@@ -47,8 +47,17 @@
         </v-col>
       </v-row>
 
-      <v-row>
-        {{ results }}
+      <v-row justify="center">
+        <v-col cols="12" class="my-12">
+          <client-only v-if="chartDisplay">
+            <line-chart
+              :height="200"
+              :chart-options="options"
+              :chart-data="chartData"
+            />
+          </client-only>
+        </v-col>
+        <v-col class="my-12"> </v-col>
       </v-row>
     </v-col>
   </v-row>
@@ -64,6 +73,56 @@ export default {
 
   data: () => ({
     results: [],
+    chartDisplay: false,
+    chartData: {
+      labels: [],
+      datasets: [
+        {
+          label: "Dégât moyen par tour",
+          data: [],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 18,
+            },
+          },
+          title: {
+            display: true,
+            text: "CA adverse",
+            font: {
+              size: 20,
+            },
+            color: "rgba(109, 0, 0, 1)",
+          },
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 18,
+            },
+          },
+          title: {
+            display: true,
+            text: "Dégâts moyen par  tour",
+            font: {
+              size: 20,
+            },
+            color: "rgba(109, 0, 0, 1)",
+          },
+        },
+      },
+    },
   }),
 
   computed: {
@@ -94,13 +153,17 @@ export default {
     },
 
     compute() {
+      this.chartDisplay = true;
+      this.$vuetify.goTo(400, { duration: 1000 });
       let attacks = this.attacks;
       let globalModifAttaque = this.globalModifAttaque;
       let globalModifDegats = this.globalModifDegats;
       let results = [];
       let turnNumber = 10000;
+      let labels = [];
 
       for (let CA = 10; CA < 26; CA++) {
+        labels.push(CA);
         let dmg = 0;
         for (let t = 0; t < turnNumber; t++) {
           for (const attack of attacks) {
@@ -116,6 +179,19 @@ export default {
         }
         results.push(dmg / turnNumber);
       }
+
+      this.chartData = {
+        labels,
+        datasets: [
+          {
+            label: "Dégât moyen par tour",
+            data: results,
+            backgroundColor: ["rgba(109, 0, 0, 1)"],
+            borderColor: ["rgba(109, 0, 0, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      };
 
       return results;
     },
