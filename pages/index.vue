@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" lg="8" class="pa-0">
+    <v-col cols="12" lg="6" class="pa-0">
       <div class="text-h3 primary--text text-center my-12">
         PF2E damage calculator
       </div>
