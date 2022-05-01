@@ -17,20 +17,33 @@ export const mutations = {
     let id = state.attackNumber;
     state.attacks.push({
       id: id,
-      modifAttack: 0,
+      modifAttaque: 0,
       modifDegats: 0,
-      selectedDices: [],
+      selectedDices: ["d6"],
     });
-
     state.attackNumber++;
   },
-  removeAttack(state, id) {
+
+  REMOVE_ATTACK(state, id) {
     for (let i = 0; i < state.attacks.length; i++) {
       let attack = state.attacks[i];
       if (attack.id == id) {
-        console.log(attack);
         state.attacks.splice(i, 1);
       }
     }
+  },
+
+  UPDATE_ATTACK(state, val) {
+    for (let i = 0; i < state.attacks.length; i++) {
+      if (state.attacks[i].id == val.id) {
+        state.attacks[i] = val;
+      }
+    }
+  },
+};
+
+export const getters = {
+  GET_ATTACK: (state) => (id) => {
+    return { ...state.attacks.find((attack) => attack.id === id) };
   },
 };

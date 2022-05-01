@@ -5,7 +5,7 @@
         PF2E damage calculator
       </div>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="5">
           <v-text-field
             outlined
             label="Modif attaque"
@@ -14,7 +14,7 @@
           >
           </v-text-field>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="5">
           <v-text-field
             outlined
             label="Modif dégâts"
@@ -24,7 +24,12 @@
           </v-text-field>
         </v-col>
       </v-row>
-      <v-row align="center" justify="center">
+
+      <div v-for="attack in attacks" :key="attack.id">
+        <Attack :id="attack.id"></Attack>
+      </div>
+
+      <v-row align="center" justify="center" class="mt-6">
         <v-col cols="auto" class="text-body-1 font-weight-bold">
           Ajouter une attaque
         </v-col>
@@ -34,10 +39,6 @@
           </v-btn>
         </v-col>
       </v-row>
-
-      <div v-for="attack in attacks" :key="attack.id">
-        <Attack></Attack>
-      </div>
     </v-col>
   </v-row>
 </template>
