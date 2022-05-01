@@ -26,6 +26,8 @@
         </v-col>
       </v-row>
 
+      <v-card-title> Attaques </v-card-title>
+
       <div v-for="attack in attacks" :key="attack.id">
         <Attack :id="attack.id"></Attack>
       </div>
