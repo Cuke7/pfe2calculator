@@ -1,25 +1,28 @@
 export const state = () => ({
+  globalModifAttaque: 0,
+  globalModifDegats: 0,
   attacks: [],
-  attacksNumber: 0,
+  attackNumber: 0,
 });
 
 export const mutations = {
-  addAttack(state, val) {
-    let id = state.attacksNumber;
+  GLOBAL_MODIF_ATTAQUE(state, val) {
+    state.globalModifAttaque = val;
+  },
+  GLOBAL_MODIF_DEGATS(state, val) {
+    state.globalModifDegats = val;
+  },
+
+  ADD_ATTACK(state) {
+    let id = state.attackNumber;
     state.attacks.push({
       id: id,
       modifAttack: 0,
       modifDegats: 0,
       selectedDices: [],
     });
-    state.attacksNumber++;
-  },
-  updateAttacks(state, attack) {
-    for (let i = 0; i < state.attacks.length; i++) {
-      if (state.attacks[i].id == attack.id) {
-        state.attacks[i] = attack;
-      }
-    }
+
+    state.attackNumber++;
   },
   removeAttack(state, id) {
     for (let i = 0; i < state.attacks.length; i++) {
@@ -31,14 +34,3 @@ export const mutations = {
     }
   },
 };
-
-// export const getters = {
-//   getAttack: (state) => (val) => {
-//     // console.log(val);
-//     for (const attack of state.attacks) {
-//       if (val == attack.id) {
-//         return attack;
-//       }
-//     }
-//   },
-// };

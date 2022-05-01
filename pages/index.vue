@@ -1,72 +1,84 @@
 <template>
-  <v-row justify="center" align="center" class="px-2">
-    <v-col cols="12" md="8">
-      <div class="text-h3 text-center primary--text my-12">
-        Calculateur de dégâts PF2E
+  <v-row justify="center">
+    <v-col cols="12" lg="8" class="pa-0">
+      <div class="text-h3 primary--text text-center my-12">
+        PF2E damage calculator
       </div>
-      <v-card-title class="px-0"> Modificateurs fixes : </v-card-title>
-      <v-row align="center">
+      <v-row>
         <v-col cols="6">
           <v-text-field
-            label="Modif attaque"
             outlined
-            type="number"
-            v-model="modifAttaque"
-            hide-details
-          ></v-text-field>
+            label="Modif attaque"
+            v-model="globalModifAttaque"
+            type="Number"
+          >
+          </v-text-field>
         </v-col>
         <v-col cols="6">
           <v-text-field
-            label="Modif dégâts"
             outlined
-            type="number"
-            v-model="modifDegats"
-            hide-details
-          ></v-text-field>
+            label="Modif dégâts"
+            v-model="globalModifDegats"
+            type="Number"
+          >
+          </v-text-field>
         </v-col>
       </v-row>
-
-      <div v-for="attack in attacks" :key="attack.id">
-        <Attack :attackInit="attack"></Attack>
-      </div>
-
-      <v-row justify="center" align="center" class="my-2">
-        <v-col cols="auto" class="font-weight-bold">
+      <v-row align="center" justify="center">
+        <v-col cols="auto" class="text-body-1 font-weight-bold">
           Ajouter une attaque
         </v-col>
         <v-col cols="auto">
           <v-btn color="green" fab width="40" height="40" @click="addAttack()">
-            <v-icon color="white"> mdi-plus </v-icon>
+            <v-icon> mdi-plus </v-icon>
           </v-btn>
         </v-col>
       </v-row>
 
-      <v-row justify="end">
-        <v-col cols="auto">
-          <v-btn color="primary"> Compute </v-btn>
-        </v-col>
-      </v-row>
+      <div v-for="attack in attacks" :key="attack.id">
+        <Attack></Attack>
+      </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
 export default {
+  layout: "main",
+
   mounted() {
-    this.addAttack();
+    this.$store.commit("ADD_ATTACK");
   },
+
   data: () => ({
-    modifAttaque: 0,
-    modifDegats: 0,
+    //
   }),
+
   computed: {
     attacks() {
       return this.$store.state.attacks;
     },
+    globalModifAttaque: {
+      set(val) {
+        this.$store.commit("GLOBAL_MODIF_ATTAQUE", val);
+      },
+      get() {
+        return this.$store.state.globalModifAttaque;
+      },
+    },
+    globalModifDegats: {
+      set(val) {
+        this.$store.commit("GLOBAL_MODIF_DEGATS", val);
+      },
+      get() {
+        return this.$store.state.globalModifDegats;
+      },
+    },
   },
+
   methods: {
     addAttack() {
-      this.$store.commit("addAttack");
+      this.$store.commit("ADD_ATTACK");
     },
   },
 };
