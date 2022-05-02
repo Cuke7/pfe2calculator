@@ -1,34 +1,32 @@
 <template>
-  <div>
-    <v-row align="center">
-      <v-col cols="2">
-        <v-text-field
-          outlined
-          label="Modif jet d'attaque"
-          v-model="attack.modifAttaque"
-          type="number"
-          hide-details=""
-        />
-      </v-col>
-      <v-col cols="2">
-        <v-text-field
-          outlined
-          label="Modif dégâts"
-          v-model="attack.modifDegats"
-          type="number"
-          hide-details
-        />
-      </v-col>
-      <v-col cols="7">
-        <DicePicker v-model="attack.selectedDices" />
-      </v-col>
-      <v-col cols="1">
-        <v-btn fab width="40" height="40" color="red" @click="remove()">
-          <v-icon> mdi-minus </v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-  </div>
+  <v-row align="center">
+    <v-col cols="6" lg="2">
+      <v-text-field
+        outlined
+        label="Modif jet d'attaque"
+        v-model="attack.modifAttaque"
+        type="number"
+        hide-details=""
+      />
+    </v-col>
+    <v-col cols="6" lg="2">
+      <v-text-field
+        outlined
+        label="Modif dégâts"
+        v-model="attack.modifDegats"
+        type="number"
+        hide-details
+      />
+    </v-col>
+    <v-col cols="10" lg="7">
+      <DicePicker v-model="attack.selectedDices" />
+    </v-col>
+    <v-col cols="2" lg="1" v-if="id > 0">
+      <v-btn fab width="40" height="40" color="red" @click="remove()">
+        <v-icon> mdi-minus </v-icon>
+      </v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

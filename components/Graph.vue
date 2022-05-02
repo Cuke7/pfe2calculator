@@ -1,7 +1,8 @@
 <template>
   <div>
+    <v-card-title> Résultats </v-card-title>
     <v-row justify="center" align="center">
-      <v-col cols="4">
+      <v-col cols="auto" class="py-0">
         <v-text-field
           color="primary"
           v-model="buildName"
@@ -10,17 +11,21 @@
         >
         </v-text-field>
       </v-col>
-      <v-col cols="auto">
+      <v-col cols="auto" class="py-0">
         <v-btn color="primary" @click="compute()"> Calculer </v-btn>
       </v-col>
     </v-row>
-    <v-row justify="space-between">
-      <v-col cols="9" class="mb-12 mt-6">
+    <v-row justify="center" class="mb-12">
+      <v-col cols="12" class="px-6" lg="9">
         <client-only>
-          <line-chart :chart-options="options" :chart-data="chartData" />
+          <line-chart
+            :chart-options="options"
+            :chart-data="chartData"
+            ref="graph"
+          />
         </client-only>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="10" lg="3">
         <BuildList />
       </v-col>
     </v-row>
@@ -46,22 +51,35 @@ export default {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        title: {
           display: true,
+          text: "Dégâts moyens par tour",
+          color: "rgba(109, 0, 0, 1)",
+          font: {
+            size: 14,
+          },
+        },
+        legend: {
+          display: false,
+          labels: {
+            font: {
+              size: 14,
+            },
+          },
         },
       },
       scales: {
         x: {
           ticks: {
             font: {
-              size: 18,
+              size: 16,
             },
           },
           title: {
             display: true,
             text: "CA adverse",
             font: {
-              size: 20,
+              size: 18,
             },
             color: "rgba(109, 0, 0, 1)",
           },
@@ -69,14 +87,14 @@ export default {
         y: {
           ticks: {
             font: {
-              size: 18,
+              size: 16,
             },
           },
           title: {
-            display: true,
-            text: "Dégâts moyens par tour",
+            // display: true,
+            // text: "Dégâts moyens par tour",
             font: {
-              size: 20,
+              size: 18,
             },
             color: "rgba(109, 0, 0, 1)",
           },
@@ -130,7 +148,7 @@ export default {
       return colors[l];
     },
     compute() {
-      this.$vuetify.goTo(400, { duration: 1000 });
+      this.$vuetify.goTo(this.$refs.graph, { duration: 1000 });
       let attacks = this.attacks;
 
       let globalModifAttaque = Number(this.globalModifAttaque);
@@ -163,18 +181,7 @@ export default {
       if (buildName == "") {
         buildName = "Build n°" + Number(this.$store.state.datasets.length + 1);
       }
-      //   this.chartData = {
-      //     labels: this.labels,
-      //     datasets: [
-      //       {
-      //         label: "Build n°1",
-      //         data: results,
-      //         backgroundColor: [color],
-      //         borderColor: [color],
-      //         borderWidth: 1,
-      //       },
-      //     ],
-      //   };
+
       this.$store.commit("ADD_DATASET", {
         label: buildName,
         data: results,
@@ -182,6 +189,7 @@ export default {
         borderColor: [color],
         borderWidth: 1,
       });
+      this.options.plugins.legend.display = true;
     },
     getAverageDiceDamage(dices) {
       let result = 0;

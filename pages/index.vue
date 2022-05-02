@@ -1,21 +1,16 @@
 <template>
-  <div>
-    <v-row justify="center">
-      <v-col cols="12" lg="8" class="pa-0">
-        <div class="text-h3 primary--text text-center my-12">
-          PF2E damage calculator
-        </div>
-        <ModifGlobaux />
-        <Settings />
-        <v-divider class="my-6"></v-divider>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col cols="12" lg="10">
-        <Graph />
-      </v-col>
-    </v-row>
-  </div>
+  <v-row justify="center">
+    <v-col cols="12" lg="8" class="pa-6">
+      <div class="text-h3 primary--text text-center my-12">
+        PF2E damage calculator
+      </div>
+      <ModifGlobaux />
+      <v-divider class="mt-6"></v-divider>
+      <Settings />
+      <v-divider class="my-6"></v-divider>
+      <Graph />
+    </v-col>
+  </v-row>
 </template>
 
 <script>

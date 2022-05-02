@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-card-title> Modificateurs globaux</v-card-title>
+    <v-card-title> Modificateurs globaux </v-card-title>
     <v-row>
-      <v-col cols="5">
+      <v-col cols="6">
         <v-text-field
           outlined
           label="Modif attaque"
@@ -12,7 +12,7 @@
         >
         </v-text-field>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="6">
         <v-text-field
           outlined
           label="Modif dégâts"

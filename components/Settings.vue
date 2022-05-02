@@ -3,14 +3,14 @@
     <v-col cols="12">
       <v-card-title> Attaques </v-card-title>
 
-      <div v-for="attack in attacks" :key="attack.id">
-        <Attack :id="attack.id"></Attack>
-      </div>
-
-      <v-row align="center" justify="center" class="mt-6">
-        <v-col cols="auto" class="text-body-1 font-weight-bold">
-          Ajouter une attaque
+      <v-row>
+        <v-col cols="12" v-for="attack in attacks" :key="attack.id">
+          <Attack :id="attack.id" class="mb-3"></Attack>
         </v-col>
+      </v-row>
+
+      <v-row align="center" justify="center">
+        <v-col cols="auto" class="text-body-1"> Ajouter une attaque </v-col>
         <v-col cols="auto">
           <v-btn color="green" fab width="40" height="40" @click="addAttack()">
             <v-icon> mdi-plus </v-icon>
@@ -31,7 +31,6 @@ export default {
     attacks() {
       return this.$store.state.attacks;
     },
-   
   },
 
   methods: {
