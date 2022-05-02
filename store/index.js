@@ -3,6 +3,7 @@ export const state = () => ({
   globalModifDegats: 0,
   attacks: [],
   attackNumber: 0,
+  datasets: [],
 });
 
 export const mutations = {
@@ -39,6 +40,13 @@ export const mutations = {
         state.attacks[i] = val;
       }
     }
+  },
+
+  ADD_DATASET(state, dataset) {
+    state.datasets.push(dataset);
+  },
+  REMOVE_DATASET(state, dataset) {
+    state.datasets.splice(state.datasets.indexOf(dataset), 1);
   },
 };
 

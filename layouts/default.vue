@@ -21,4 +21,9 @@ export default {
   background-image: url("/background.jpg");
   background-repeat: repeat;
 }
+
+.v-card {
+  background-image: url("/background.jpg");
+  background-repeat: repeat;
+}
 </style>
