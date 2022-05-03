@@ -22,8 +22,9 @@ export default {
   background-repeat: repeat;
 }
 
-.v-card {
+.v-sheet {
   background-image: url("/background.jpg");
   background-repeat: repeat;
 }
+
 </style>

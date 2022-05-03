@@ -1,6 +1,14 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" lg="8" class="pa-6">
+      <v-row justify="end">
+        <v-col cols="auto">
+          <v-btn color="primary" class="mr-12" nuxt to="/mikalculator"
+            >Mikalculator2000
+            <v-icon right> mdi-arrow-right </v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
       <div class="text-h3 primary--text text-center my-12">
         PF2E damage calculator
       </div>
@@ -17,7 +25,6 @@
 import Settings from "../components/Settings.vue";
 import ModifGlobaux from "../components/ModifGlobaux.vue";
 export default {
-  layout: "main",
   components: { Settings, ModifGlobaux },
   mounted() {
     this.$store.commit("ADD_ATTACK");
