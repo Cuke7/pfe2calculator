@@ -8,7 +8,7 @@
         <v-row justify="center">
           <v-col cols="auto">
             <v-avatar color="grey" size="164">
-              <v-img src="./micka.jpg"></v-img>
+              <v-img src="/micka.jpg"></v-img>
             </v-avatar>
           </v-col>
         </v-row>
