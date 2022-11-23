@@ -114,7 +114,7 @@ export default {
     },
     labels() {
       let labels = [];
-      for (let CA = 10; CA < 26; CA++) {
+      for (let CA = 15; CA < 36; CA++) {
         labels.push(CA);
       }
       return labels;
