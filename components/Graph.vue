@@ -155,7 +155,7 @@ export default {
       let globalModifDegats = Number(this.globalModifDegats);
       let results = [];
       let turnNumber = 10000;
-      for (let CA = 10; CA < 26; CA++) {
+      for (let CA = 15; CA < 36; CA++) {
         let dmg = 0;
         for (let t = 0; t < turnNumber; t++) {
           for (const attack of attacks) {
